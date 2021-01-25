@@ -1,0 +1,2 @@
+# locksway
+sway lock script
