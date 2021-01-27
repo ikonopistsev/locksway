@@ -15,11 +15,30 @@ case "$1" in
 	;;
 
     lock)
+	if [ $(playerctl status) = "Playing" ]; then
+		playerctl pause
+	fi
 	if ! pgrep -nx swaylock > /dev/null 2>&1; then
-		swaylock --indicator-radius 80 --ring-color '#268bd2' --color '#2c2c2c' &
+# standart swaylock
+#		swaylock --indicator-radius 80 --ring-color '#268bd2' --color '#2c2c2c' &
+# swaylock-effects
+		swaylock \
+			--screenshots \
+			--clock \
+			--indicator \
+			--indicator-radius 100 \
+			--indicator-thickness 7 \
+			--effect-blur 7x5 \
+			--effect-vignette 0.5:0.5 \
+			--ring-color bb00cc \
+			--key-hl-color 880033 \
+			--line-color 00000000 \
+			--inside-color 00000088 \
+			--separator-color 00000000 \
+			--grace 5 \
+			--fade-in 1 &
 	fi
 	;;
-
     *)
 	echo "Usage: $0 on|off|lock|resume"
 	exit 1
