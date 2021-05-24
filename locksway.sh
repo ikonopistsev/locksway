@@ -15,7 +15,8 @@ case "$1" in
 	;;
 
     lock)
-	if [ $(playerctl status) = "Playing" ]; then
+	PLAYER_STATUS=$(playerctl status 2>&1) 
+	if [ "$PLAYER_STATUS" = "Playing" ]; then
 		playerctl pause
 	fi
 	if ! pgrep -nx swaylock > /dev/null 2>&1; then
